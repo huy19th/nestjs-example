@@ -3,4 +3,9 @@ export interface Configuration {
     mongo: {
         uri: string;
     };
+    redis: {
+        url: string;
+        username: string;
+        password: string;
+    };
 }

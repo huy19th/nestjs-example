@@ -7,6 +7,11 @@ const config: Configuration = {
     mongo: {
         uri: process.env.MONGO_URI
     },
+    redis: {
+        url: process.env.REDIS_URL || 'redis://localhost:6379',
+        username: process.env.REDIS_USERNAME || 'root',
+        password: process.env.REDIS_PASSWORD || 'password',
+    },
 };
 
 export const configuration: ConfigFactory<Configuration> = () => config;
