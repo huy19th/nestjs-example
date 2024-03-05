@@ -3,11 +3,16 @@ import { AppModule } from './app.module';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { WinstonModule } from 'nest-winston';
+import { WinstonConfig } from './config/winston.config';
 import helmet from 'helmet';
 require('dotenv').config();
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(
+    AppModule,
+    { logger: WinstonModule.createLogger(WinstonConfig) }
+  );
   const configService = app.get(ConfigService);
   const port = configService.get('port');
   app.enableCors();
