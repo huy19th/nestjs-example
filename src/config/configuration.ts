@@ -12,6 +12,12 @@ const config: Configuration = {
         username: process.env.REDIS_USERNAME || 'root',
         password: process.env.REDIS_PASSWORD || 'password',
     },
+    nodemailer: {
+        user: process.env.NODEMAILER_USER,
+        pass: process.env.NODEMAILER_PASS,
+        host: process.env.NODEMAILER_HOST,
+        port: +process.env.NODEMAILER_PORT
+    },
 };
 
 export const configuration: ConfigFactory<Configuration> = () => config;

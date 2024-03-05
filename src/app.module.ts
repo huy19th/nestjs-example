@@ -7,6 +7,7 @@ import { ThrottlerConfigService } from './config/throttler.config';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
 import { CacheModule } from './providers/cache/cache.module';
+import { EmailModule } from './providers/email/email.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { CacheModule } from './providers/cache/cache.module';
     MongooseModule.forRootAsync({ useClass: MongooseConfigService, imports: [ConfigModule] }),
     ThrottlerModule.forRootAsync({ useClass: ThrottlerConfigService, imports: [ConfigModule] }),
     CacheModule,
+    EmailModule,
   ],
   controllers: [],
   providers: [

@@ -8,4 +8,10 @@ export interface Configuration {
         username: string;
         password: string;
     };
+    nodemailer: {
+        user: string;
+        pass: string;
+        host: string;
+        port: number;
+    };
 }
