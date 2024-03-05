@@ -8,6 +8,7 @@ import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
 import { CacheModule } from './providers/cache/cache.module';
 import { EmailModule } from './providers/email/email.module';
+import { UserModule } from './modules/user/user.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { EmailModule } from './providers/email/email.module';
     ThrottlerModule.forRootAsync({ useClass: ThrottlerConfigService, imports: [ConfigModule] }),
     CacheModule,
     EmailModule,
+    UserModule,
   ],
   controllers: [],
   providers: [
