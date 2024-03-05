@@ -4,6 +4,7 @@ import { HydratedDocument } from 'mongoose';
 import { MongoError } from 'mongodb';
 import normalizeEmail from 'normalize-email';
 import * as bcrypt from 'bcrypt';
+import { ROLE_USER } from './user.constant';
 
 export type UserDocument = HydratedDocument<User>;
 
@@ -37,6 +38,11 @@ export class User {
     })
     username?: string;
 
+    @Prop({
+        type: Number,
+        default: ROLE_USER
+    })
+    role: number;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
