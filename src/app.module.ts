@@ -9,6 +9,9 @@ import { APP_GUARD } from '@nestjs/core';
 import { CacheModule } from './providers/cache/cache.module';
 import { EmailModule } from './providers/email/email.module';
 import { UserModule } from './modules/user/user.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { AuthGuard } from './modules/auth/auth.guard';
+import { TokenModule } from './providers/token/token.module';
 
 @Module({
   imports: [
@@ -18,10 +21,13 @@ import { UserModule } from './modules/user/user.module';
     CacheModule,
     EmailModule,
     UserModule,
+    AuthModule,
+    TokenModule,
   ],
   controllers: [],
   providers: [
     { provide: APP_GUARD, useClass: ThrottlerGuard },
+    { provide: APP_GUARD, useClass: AuthGuard },
   ],
 })
 export class AppModule { }

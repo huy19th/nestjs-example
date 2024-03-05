@@ -14,4 +14,9 @@ export interface Configuration {
         host: string;
         port: number;
     };
+    security: {
+        jwtSecret: string;
+        accessTokenExpiry: string;
+        cacheExpiry: number;
+    };
 }
