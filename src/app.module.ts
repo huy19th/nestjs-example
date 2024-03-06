@@ -12,6 +12,7 @@ import { UserModule } from './modules/user/user.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { AuthGuard } from './modules/auth/auth.guard';
 import { TokenModule } from './providers/token/token.module';
+import { UploadModule } from './modules/upload/upload.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { TokenModule } from './providers/token/token.module';
     UserModule,
     AuthModule,
     TokenModule,
+    UploadModule,
   ],
   controllers: [],
   providers: [

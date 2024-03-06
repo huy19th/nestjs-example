@@ -6,6 +6,7 @@ import { ConfigService } from '@nestjs/config';
 import { WinstonModule } from 'nest-winston';
 import { WinstonConfig } from './config/winston.config';
 import helmet from 'helmet';
+import { join } from 'path';
 require('dotenv').config();
 
 async function bootstrap() {
@@ -19,6 +20,7 @@ async function bootstrap() {
   app.use(helmet());
   app.useBodyParser('json', { limit: '10mb' });
   app.useGlobalPipes(new ValidationPipe());
+  app.useStaticAssets(join(__dirname, './public'));
   await app.listen(port);
 }
 bootstrap();
