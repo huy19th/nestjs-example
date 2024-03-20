@@ -5,6 +5,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { WinstonModule } from 'nest-winston';
 import { WinstonConfig } from './config/winston.config';
+import { RedisIoAdapter } from './config/redis-io-adapter.config';
 import helmet from 'helmet';
 import { join } from 'path';
 require('dotenv').config();
@@ -21,6 +22,11 @@ async function bootstrap() {
   app.useBodyParser('json', { limit: '10mb' });
   app.useGlobalPipes(new ValidationPipe());
   app.useStaticAssets(join(__dirname, './public'));
+
+  const redisIoAdapter = new RedisIoAdapter(app);
+  await redisIoAdapter.connectToRedis();
+  app.useWebSocketAdapter(redisIoAdapter);
+
   await app.listen(port);
 }
 bootstrap();

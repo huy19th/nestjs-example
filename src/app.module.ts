@@ -13,6 +13,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { AuthGuard } from './modules/auth/auth.guard';
 import { TokenModule } from './providers/token/token.module';
 import { UploadModule } from './modules/upload/upload.module';
+import { GameModule } from './modules/game/game.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { UploadModule } from './modules/upload/upload.module';
     AuthModule,
     TokenModule,
     UploadModule,
+    GameModule,
   ],
   controllers: [],
   providers: [
