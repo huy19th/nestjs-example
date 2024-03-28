@@ -1,14 +1,18 @@
 import { Controller, Get, Post, Delete, Body, Patch, Param } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { WalletService } from './wallet.service';
+import { CreateWalletDto, AdjustBalanceDto } from './wallet.dto';
+import { IWallet } from './wallet.interface';
 
 // just for testing database interaction, not how api should be configured
+@ApiTags('wallet')
 @Controller('wallet')
 export class WalletController {
 
     constructor(private walletService: WalletService) { }
 
     @Get('/all-wallets')
-    async getAllWallets() {
+    async getAllWallets(): Promise<IWallet[]> {
         const wallets = await this.walletService.getAllWallets();
         return wallets.map(wallet => ({ ...wallet, balance: wallet.balance.toString() }));
     }
@@ -19,17 +23,17 @@ export class WalletController {
     }
 
     @Post()
-    async createWallet(@Body('balance') balance: number) {
-        const wallet = await this.walletService.createWallet(balance);
+    async createWallet(@Body() body: CreateWalletDto) {
+        const wallet = await this.walletService.createWallet(body.balance);
         return { ...wallet, balance: wallet.balance.toString() };
     }
 
     @Patch('/:id')
     async adjustBalance(
         @Param('id') id: string,
-        @Body('balance') balance: number
+        @Body() body: AdjustBalanceDto
     ) {
-        const wallet = await this.walletService.adjustBalance(id, balance);
+        const wallet = await this.walletService.adjustBalance(id, body.balance);
         return { ...wallet, balance: wallet.balance.toString() };
     }
 
